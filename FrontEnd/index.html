@@ -9,7 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./scripts/works.js"></script>
+	<script src="./scripts/works.js" defer></script>
+	<script src="./scripts/event-filters.js" defer></script>
 </head>
 <body>
 <header>
@@ -37,6 +38,10 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<button class="filter filter--all">Tous</button>
+		<button class="filter filter--objects">Objets</button>
+		<button class="filter filter--appartments">Appartements</button>
+		<button class="filter filter--hotels">Hotels et restaurants</button>
 		<div class="gallery"></div>
 	</section>
 	<section id="contact">

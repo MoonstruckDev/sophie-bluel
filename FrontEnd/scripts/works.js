@@ -4,8 +4,13 @@ async function getAPIworks() {
     return works;
 }
 
+const gallery = document.querySelector('.gallery');
+
+function resetWorks() {
+    gallery.innerHTML = "";
+}
+
 function generateWorks(works) {
-    const gallery = document.querySelector('.gallery');
     works.forEach((work) => {
         const figure = document.createElement('figure');
         figure.innerHTML = `
