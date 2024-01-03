@@ -4,7 +4,7 @@ async function getAPIworks() {
     return works;
 }
 
-function addWork(works) {
+function generateWorks(works) {
     const gallery = document.querySelector('.gallery');
     works.forEach((work) => {
         const figure = document.createElement('figure');
@@ -18,5 +18,5 @@ function addWork(works) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const works = await getAPIworks();
-    addWork(works);
+    generateWorks(works);
 });
