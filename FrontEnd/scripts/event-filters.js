@@ -1,28 +1,35 @@
-// event-filters.js
-
 function handleFilterClick(categoryName) {
-    return function () {
-        getAPIworks().then((works) => {
-            const filteredWorks = works.filter((work) => work.category.name === categoryName);
-            resetWorks();
-            generateWorks(filteredWorks);
-        });
-    };
+    const allWorks = JSON.parse(sessionStorage.getItem('allWorks'));
+
+    function filterAndGenerate(works) {
+        const filteredWorks = works.filter((work) => work.category.name === categoryName);
+        resetWorks();
+        generateWorks(filteredWorks);
+    }
+
+    if (allWorks) {
+        filterAndGenerate(allWorks);
+    } else {
+        setWorksFromAPI().then((works) => filterAndGenerate(works));
+    }
 }
 
-const filterObjects = document.querySelector(".filter--objects");
-filterObjects.addEventListener("click", handleFilterClick("Objets"));
+function addFilterEventListener(selector, categoryName) {
+    const filterElement = document.querySelector(selector);
+    filterElement.addEventListener("click", () => handleFilterClick(categoryName));
+}
 
-const filterAppartments = document.querySelector(".filter--appartments");
-filterAppartments.addEventListener("click", handleFilterClick("Appartements"));
 
-const filterHotels = document.querySelector(".filter--hotels");
-filterHotels.addEventListener("click", handleFilterClick("Hotels & restaurants"));
+function handleAllFilterClick() {
+    resetWorks();
+    generateWorks(JSON.parse(sessionStorage.getItem('allWorks')));
+}
 
 const filterAll = document.querySelector(".filter--all");
-filterAll.addEventListener("click", function () {
-    getAPIworks().then((works) => {
-        resetWorks();
-        generateWorks(works);
-    });
-});
+filterAll.addEventListener("click", handleAllFilterClick);
+
+addFilterEventListener(".filter--objects", "Objets");
+addFilterEventListener(".filter--appartments", "Appartements");
+addFilterEventListener(".filter--hotels", "Hotels & restaurants");
+addFilterEventListener(".filter--all", null); 
+

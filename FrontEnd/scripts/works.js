@@ -1,10 +1,26 @@
 async function getAPIworks() {
-    const response = await fetch('http://localhost:5678/api/works');
-    const works = await response.json();
-    return works;
+    try {
+        const response = await fetch('http://localhost:5678/api/works');
+        const works = await response.json();
+        sessionStorage.setItem('allWorks', JSON.stringify(works));
+        console.log("You are now using session storage")
+        return works; // Return the fetched works
+    } catch (error) {
+        console.error('Error fetching works:', error);
+        throw error; // Propagate the error for better error handling
+    }
 }
 
 const gallery = document.querySelector('.gallery');
+const allWorks = JSON.parse(sessionStorage.getItem('allWorks'))
+checkSessionStorage();
+
+function checkSessionStorage() {
+    if (!allWorks) {
+        getAPIworks();
+    }
+    return allWorks;
+}
 
 function resetWorks() {
     gallery.innerHTML = "";
@@ -23,5 +39,5 @@ function generateWorks(works) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const works = await getAPIworks();
-    generateWorks(works);
+    generateWorks(allWorks);
 });
