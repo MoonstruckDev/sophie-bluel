@@ -3,7 +3,7 @@ const uniqueCategoryIds = [...new Set(allWorks.map(item => item.categoryId))];
 
 // Create "All" button
 const allButton = document.createElement("button");
-allButton.innerText = "All";
+allButton.innerText = "Tous";
 allButton.addEventListener("click", () => handleFilterClick("All"));
 
 // Create <ul> element

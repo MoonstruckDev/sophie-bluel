@@ -132,15 +132,20 @@ li:hover {
 	color: #1D6154;
 	border-radius: 60px;
 	border: 2px solid #1D6154;
-	padding: 1em 1em;
+	padding: .5em 1em;
 	font-family: 'Syne';
 	font-size: 16px;
-	font-family: Syne;
 	font-weight: 700; 
+}
+
+#portfolio button:hover {
+	background-color: #1D6154;
+	color: white;
 }
 
 #portfolio ul {
 	display: flex;
+	gap: .5em;
 	justify-content: center;
 	flex-wrap: wrap;
 	margin: 2em 0;
