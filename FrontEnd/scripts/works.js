@@ -1,4 +1,4 @@
-async function getAPIworks() {
+async function setWorksFromAPI() {
     try {
         const response = await fetch('http://localhost:5678/api/works');
         const works = await response.json();
@@ -17,7 +17,7 @@ checkSessionStorage();
 
 function checkSessionStorage() {
     if (!allWorks) {
-        getAPIworks();
+        setWorksFromAPI();
     }
     return allWorks;
 }
@@ -38,6 +38,6 @@ function generateWorks(works) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const works = await getAPIworks();
+    const works = await setWorksFromAPI();
     generateWorks(allWorks);
 });
