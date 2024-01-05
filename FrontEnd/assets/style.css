@@ -275,8 +275,67 @@ footer nav ul {
 	margin: auto;
 }
 
+/* .login input[type="email"] {
+	transition: background-color 0.5s;
+}  */
+
+.login input:not(:focus):not(:placeholder-shown):invalid {
+	border: 2px solid red;
+	animation: headshake 100ms cubic-bezier(.4,.1,.6,.9) 2;
+}
+
+.login > .container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.login aside {
+	text-align: center;
+}
+
+.login button {
+	background: #1D6154;
+	color: white;
+	border-radius: 60px;
+	border: 2px solid #1D6154;
+	padding: .5em 0;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700; 
+	width: 50%;
+	margin: auto;
+}
+
 a:visited {
 	color: inherit; /* Use the default text color for visited links */
-  }
+}
+
+.login .error__wrapper {
+	background-color: red;
+	color: white;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+}
 
 
+.error__wrapper > i {
+	padding: 0 .5rem;
+}
+
+.error__wrapper.hidden {
+	display: none;
+}
+
+
+
+@keyframes headshake {
+    25% {
+    
+        transform: translateX(2%);
+    }
+    75% {
+        transform: translateX(2% * -1);
+    }
+}
