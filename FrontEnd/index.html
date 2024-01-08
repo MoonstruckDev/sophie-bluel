@@ -9,17 +9,27 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 	<script src="./scripts/works.js" defer></script>
 	<script src="./scripts/event-filters.js" defer></script>
+	<script src="./scripts/admin.js" defer></script>
+	<script src="./scripts/homepage.js" defer></script>
+	<script src="./scripts/login-flow.js" defer></script>
 </head>
 <body>
+<div class="admin admin__header hidden">
+	<i class="fa-solid fa-pen-to-square"></i>
+	<span>Mode Édition</span>
+</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="login.html">login</a></li>
+			<li><a class="login__button" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -37,7 +47,11 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="admin hidden">
+			<h2 class="project__title">Mes Projets</h2>
+		</div>
+
+		
 		<div class="gallery"></div>
 	</section>
 	<section id="contact">

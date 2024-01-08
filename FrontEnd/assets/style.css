@@ -336,6 +336,22 @@ a:visited {
 	display: none;
 }
 
+.admin__header {
+    display: flex;
+	justify-content: center;
+    background-color: black;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem; /* Adjust padding as needed */
+}
+
+.admin__header.hidden {
+	display: none;
+}
+
+.admin__header > span, i {
+    color: white;
+}
 
 
 @keyframes headshake {

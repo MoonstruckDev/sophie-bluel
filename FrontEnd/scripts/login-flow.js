@@ -39,6 +39,24 @@ function showStatus(message, isError = false) {
 function goHome() {
     window.location.href = 'index.html';
 }
+
+function isLoggedIn() {
+    const loginButton = document.querySelector('.login__button');
+
+    if (sessionStorage.getItem('token') !== null) {
+        // User is logged in
+        console.log("User is logged in");
+        loginButton.textContent = 'Logout';
+        // Add additional logic for logged-in state if needed
+    } else {
+        // User is not logged in
+        console.log("User is not logged in");
+        loginButton.textContent = 'Login';
+        // Add additional logic for not logged-in state if needed
+    }
+}
+
+
 function postLogin(loginDetails) {
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
@@ -59,12 +77,15 @@ function postLogin(loginDetails) {
         // Handle the response data here
         console.log("Login successful:", data);
         sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('userId', data.userId);
+
         showStatus("Login successful!");
         
         // Add a delay of 2 seconds before calling goHome()
         setTimeout(() => {
             goHome();
         }, 2000);
+        isLoggedIn();
     })
     .catch(error => {
         // Handle errors here
@@ -76,6 +97,8 @@ function postLogin(loginDetails) {
         }
     });
 }
+
+
 
 
 
