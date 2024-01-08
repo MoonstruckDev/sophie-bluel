@@ -12,20 +12,33 @@ form.addEventListener("submit", function (event) {
     postLogin(userData);
 });
 
-function showError(errorMsg) {
-    const errorWrapper = document.querySelector('.error__wrapper');
-    const error = document.querySelector('.error');
-    errorWrapper.classList.remove('hidden');
+function showStatus(message, isError = false) {
+    const statusWrapper = document.querySelector('.status__wrapper');
+    const status = document.querySelector('.status');
+    const statusIcon = document.querySelector('.status__wrapper i');
 
-    // Use response status text if available, otherwise use the provided errorMsg
-    const displayErrorMsg = errorMsg || 'HTTP error';
+    // Determine the appropriate styles based on error or success
+    const statusClass = isError ? 'error' : 'success';
+    statusWrapper.classList.remove('hidden', 'error', 'success');
+    statusWrapper.classList.add(statusClass);
 
-    error.textContent = displayErrorMsg;
+    // Set the appropriate icon based on error or success
+    statusIcon.className = isError ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-check';
+
+    // Use the provided message or default to 'HTTP error'
+    const displayMessage = message || 'HTTP error';
+    status.textContent = displayMessage;
+
+    // // Hide the status message after 2 seconds
     // setTimeout(() => {
-    //     error.classList.add('hidden');
-    // }, 20000);
+    //     statusWrapper.classList.add('hidden');
+    // }, 2000);
 }
 
+
+function goHome() {
+    window.location.href = 'index.html';
+}
 function postLogin(loginDetails) {
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
@@ -36,8 +49,9 @@ function postLogin(loginDetails) {
     })
     .then(response => {
         if (!response.ok) {
-            showError(response.statusText);
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            showStatus(response.statusText, true);
+            console.log(response.statusText);
+            throw new Error(`Error: ${response.statusText}`);
         }
         return response.json();
     })
@@ -45,18 +59,23 @@ function postLogin(loginDetails) {
         // Handle the response data here
         console.log("Login successful:", data);
         sessionStorage.setItem('token', data.token);
+        showStatus("Login successful!");
+        
+        // Add a delay of 2 seconds before calling goHome()
+        setTimeout(() => {
+            goHome();
+        }, 2000);
     })
     .catch(error => {
         // Handle errors here
         if (error instanceof TypeError) {
             // Network error, API offline
-            showError("API is offline or encountered a network error");
             console.error("Network error:", error);
         } else {
-            // Other errors
-
-            console.error("Error:", error);
+            console.error("Error:", error.message);
         }
     });
 }
+
+
 
