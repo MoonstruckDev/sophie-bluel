@@ -128,7 +128,7 @@ li:hover {
 	text-align: center;
 }
 
-button {
+.gallery__btn {
 	background: none;
 	color: #1D6154;
 	border-radius: 60px;
@@ -139,7 +139,7 @@ button {
 	font-weight: 700; 
 }
 
-button:hover {
+.gallery__btn:hover {
 	background-color: #1D6154;
 	color: white;
 }
@@ -397,32 +397,38 @@ dialog {
 	border: none;
 }
 
-table {
-	border-collapse: collapse;
-	width: 100%;
-	table-layout: fixed;
-	width: 50vw;
-	height: auto;
-}
 
-td {
-	position: relative;
-	padding: 0 .2rem;
-}
-
-td img {
-	max-width: 80px;
-	height: auto;
-}
-
-td button {
-	position: absolute;
-	top: 0;
-	right: .5rem;
-	padding: 0;
-	background: none;
+.modalGallery > h3 {
 	color: black;
+	font-size: 2rem;
+	font-family: Work Sans;
+	font-weight: 400;
+	text-align: center;
+	padding: 0 0 3rem 0;
+}
+.modalGallery__container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: .5rem;
+	grid-row-gap: .5rem;
+	padding: 0 104px
+}
+
+.modalGallery__container img {
+	width: 80px;
+}
+
+.modalGallery__container figure {
+	position: relative;
+}
+
+.modalGallery__container > figure > button {
+	position: absolute;
+	top: .2rem;
+	right: 0;
+	font-size: 1rem;
 	border: none;
+	background: none;
 }
 
 .dialog__bottom {

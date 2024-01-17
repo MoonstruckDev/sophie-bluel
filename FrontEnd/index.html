@@ -12,11 +12,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
+	<script src="./scripts/api.js" defer></script>
 	<script src="./scripts/works.js" defer></script>
 	<script src="./scripts/event-filters.js" defer></script>
 	<script src="./scripts/admin.js" defer></script>
 	<script src="./scripts/homepage.js" defer></script>
 	<script src="./scripts/login-flow.js" defer></script>
+
 </head>
 <body>
 <div class="admin admin__header hidden">
@@ -49,22 +51,19 @@
 	<section id="portfolio">
 		<dialog id="dialog">
 			<div class="dialog__nav">
-			<button  class="dialog__btn">X</button>
-			<button class="dialog__btn">X</button>
+				<button class="dialog__btn">&lt;</button>
+				<button class="dialog__btn">X</button>
 			</div>
-			<table class="works">
-				<thead>
-					<tr>
-						<th>Galerie photo</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-			<div class="dialog__bottom">
-			<button class="addPhoto">Ajouter une photo</button>
-			</div>
+
+			<section class="modalGallery">
+				<h3>Galerie photo</h3>
+				<div class="modalGallery__container"></div>
+			</section>
+			<footer class="dialog__bottom">
+				<button class="gallery__btn">Ajouter une photo</button>
+			</footer>
 		</dialog>
+		
 		<div class="project__header">
 			<h2 class="project__title">Mes Projets</h2>
 		</div>
