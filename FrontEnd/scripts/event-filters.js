@@ -15,7 +15,7 @@ allLiElement.appendChild(allButton);
 ulElement.appendChild(allLiElement);
 
 // Ooo discovering insertAdjacentElement()!
-const buttonContainer = document.querySelector("#portfolio h2");
+const buttonContainer = document.querySelector(".project__header");
 buttonContainer.insertAdjacentElement('afterend', ulElement);
 
 // Iterate through unique category IDs to create buttons and append them to the <ul>
