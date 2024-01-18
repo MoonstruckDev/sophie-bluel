@@ -33,6 +33,15 @@ function displayWorks(works, output, includeFigcaption = true, includeButtons = 
     });
 }
 
+function resetWorks(targetElement, works = null) {
+    if (works) {
+        targetElement.innerHTML = '';
+        displayWorks(works, targetElement);
+    } else {
+        targetElement.innerHTML = '';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const works = await getWorks();

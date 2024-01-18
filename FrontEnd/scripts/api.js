@@ -26,8 +26,8 @@ async function updateGallery(workId) {
         const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
         const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
 
-        gallery.innerHTML = '';
-        modalGallery.innerHTML = '';
+        resetWorks(gallery)
+        resetWorks(modalGallery)
 
         sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
 

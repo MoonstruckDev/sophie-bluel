@@ -37,15 +37,12 @@ uniqueCategoryIds.forEach(categoryId => {
 
 function handleFilterClick(categoryId) {
     console.log(`Filtering works for category ID: ${categoryId}`);
-    const filteredWorks = allWorks.filter(work => work.categoryId === categoryId);
 
+    resetWorks(gallery, categoryId === "All" ? allWorks : null); // Clear the gallery and display all works if categoryId is "All"
 
-    if (categoryId === "All") {
-        resetWorks();
-        generateWorks(allWorks, gallery);
-    } else {
-        resetWorks();
-        generateWorks(filteredWorks, gallery);
+    if (categoryId !== "All") {
+        const filteredWorks = allWorks.filter(work => work.categoryId === categoryId);
+        displayWorks(filteredWorks, gallery); // Display filtered works
     }
 }
 
