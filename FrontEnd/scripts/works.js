@@ -41,26 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
-
-function removeWorkFromUI(workId) {
-    const elementsToRemove = document.querySelectorAll(`[data-id="${workId}"]`);
-
-    elementsToRemove.forEach(element => {
-        const figure = element.closest('figure');
-
-        if (figure) {
-            figure.remove();
-        } else {
-            console.warn('Parent figure not found for one of the selected elements.');
-        }
-    });
-
-    if (elementsToRemove.length === 0) {
-        console.warn('No elements found with the specified data-id.');
-    }
-}
-
 async function refreshImages() {
     try {
         const works = await getWorks();
