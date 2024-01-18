@@ -1,7 +1,7 @@
 const gallery = document.querySelector('.gallery');
 const works = getWorks();
 
-function generateWorks(works, output, includeFigcaption = true, includeButtons = false) {
+function displayWorks(works, output, includeFigcaption = true, includeButtons = false) {
     works.forEach((work) => {
         const figure = document.createElement('figure');
         
@@ -25,7 +25,7 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
 
             deleteButton.addEventListener('click', async (e) => {
                 e.preventDefault();
-                deleteWorks(work.id);
+                deleteWork(work.id);
             });
         }
 
@@ -36,7 +36,7 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const works = await getWorks();
-        generateWorks(works, gallery);
+        displayWorks(works, gallery);
     } catch (error) {
         console.error('Error getting works:', error.message);
     }

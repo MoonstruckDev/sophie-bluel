@@ -22,17 +22,17 @@ function resetWorks() {
     gallery.innerHTML = "";
 }
 
-async function refreshImages() {
+async function updateGallery() {
     try {
         const works = await getWorks();
         resetWorks();
-        generateWorks(works, gallery);
+        displayWorks(works, gallery);
     } catch (error) {
         console.error('Error refreshing images:', error.message);
     }
 }
 
-async function deleteWorks(workId) {
+async function deleteWork(workId) {
     try {
         const authToken = sessionStorage.getItem('token');
         const apiUrl = `http://localhost:5678/api/works/${workId}`;
@@ -54,7 +54,7 @@ async function deleteWorks(workId) {
     
         sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
 
-        refreshImages();
+        updateGallery();
 
 
     } catch (error) {
