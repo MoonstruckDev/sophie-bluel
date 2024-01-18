@@ -22,12 +22,14 @@ function resetWorks() {
     gallery.innerHTML = "";
 }
 
-function RefreshWorks(workId) {
-    const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
-    const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
-
-    sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
-    refreshImages(); 
+async function refreshImages() {
+    try {
+        const works = await getWorks();
+        resetWorks();
+        generateWorks(works, gallery);
+    } catch (error) {
+        console.error('Error refreshing images:', error.message);
+    }
 }
 
 async function deleteWorks(workId) {
@@ -47,8 +49,11 @@ async function deleteWorks(workId) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        
-        RefreshWorks(workId);
+        const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
+        const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
+    
+        sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
+
 
     } catch (error) {
         console.error('Error deleting work:', error.message);

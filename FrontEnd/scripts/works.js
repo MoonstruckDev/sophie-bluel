@@ -20,7 +20,7 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
         if (includeButtons === true) {
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('delete__button');
-            deleteButton.textContent = '🙃  ';
+            deleteButton.textContent = '🙃';
             figure.appendChild(deleteButton);
 
             deleteButton.addEventListener('click', () => {
@@ -41,12 +41,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-async function refreshImages() {
-    try {
-        const works = await getWorks();
-        resetWorks();
-        generateWorks(works, gallery);
-    } catch (error) {
-        console.error('Error refreshing images:', error.message);
-    }
-}
+

@@ -21,8 +21,6 @@ showModal.addEventListener('click', () => {
     }
 });
 
-
-
 dialogButton.addEventListener('click', () => {
     dialog.close();
 });
