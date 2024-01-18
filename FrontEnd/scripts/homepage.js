@@ -14,7 +14,7 @@ showModal.addEventListener('click', () => {
 
     if (modalGallery.children.length === 0) {
         getWorks()
-            .then((works) => {generateWorks(works, modalGallery, false, true)})
+            .then((works) => {displayWorks(works, modalGallery, false, true)})
             .catch((error) => {
                 console.error('Error getting works:', error.message);
             });

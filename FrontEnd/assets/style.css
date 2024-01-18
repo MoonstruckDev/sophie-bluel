@@ -450,6 +450,10 @@ dialog {
 	background-color: black;
 }
 
+.delete__button {
+	cursor: pointer;
+}
+
 
 @keyframes headshake {
     25% {
