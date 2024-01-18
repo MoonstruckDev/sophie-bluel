@@ -24,7 +24,7 @@ function resetWorks() {
 
 function RefreshWorks(workId) {
     const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
-    const updatedWorks = currentWorks.filter(work => work.id !== parseInt(workId));
+    const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
 
     sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
     refreshImages(); 
