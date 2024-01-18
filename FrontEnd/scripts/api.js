@@ -17,20 +17,29 @@ async function getWorks() {
     }
 }
 
-
-function resetWorks() {
-    gallery.innerHTML = "";
-}
-
-async function updateGallery() {
+async function updateGallery(workId) {
     try {
-        const works = await getWorks();
-        resetWorks();
-        displayWorks(works, gallery);
+        
+        const gallery = document.querySelector('.gallery');
+        const modalGallery = document.querySelector('.modalGallery__container');
+
+        const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
+        const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
+
+        gallery.innerHTML = '';
+        modalGallery.innerHTML = '';
+
+        sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
+
+        displayWorks(updatedWorks, gallery);
+        displayWorks(updatedWorks, modalGallery, false, true);
+
     } catch (error) {
         console.error('Error refreshing images:', error.message);
     }
 }
+
+
 
 async function deleteWork(workId) {
     try {
@@ -49,12 +58,9 @@ async function deleteWork(workId) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
-        const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
-    
-        sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
 
-        updateGallery();
+
+        updateGallery(workId);
 
 
     } catch (error) {
