@@ -23,17 +23,6 @@ showModal.addEventListener('click', () => {
 
 
 
-document.addEventListener('click', (e) => {
-    const deleteButton = e.target.closest('.delete__button');
-    if (deleteButton) {
-  
-        const dataId = deleteButton.closest('figure').querySelector('img').getAttribute('data-id');
-        deleteWorks(dataId);
-        console.log(dataId);
-    }
-});
-
-
 dialogButton.addEventListener('click', () => {
     dialog.close();
 });

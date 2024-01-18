@@ -6,7 +6,6 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
         const figure = document.createElement('figure');
         
         const img = document.createElement('img');
-        img.setAttribute('data-id', work.id);
         img.setAttribute('src', work.imageUrl);
         img.setAttribute('alt', work.title);
 
@@ -23,13 +22,22 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
             deleteButton.classList.add('delete__button');
             deleteButton.textContent = '🙃  ';
             figure.appendChild(deleteButton);
+
+            deleteButton.addEventListener('click', async () => {
+                try {
+                    await deleteWorks(work.id);
+                } catch (error) {
+                    console.error('Error deleting work:', error.message);
+                }
+            });
+            
         }
 
         output.appendChild(figure);
     });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async (e) => {
     try {
         const works = await getWorks();
         generateWorks(works, gallery);
@@ -61,6 +69,7 @@ function removeWorkFromUI(workId) {
 async function refreshImages() {
     try {
         const works = await getWorks();
+        resetWorks();
         generateWorks(works, gallery);
     } catch (error) {
         console.error('Error refreshing images:', error.message);

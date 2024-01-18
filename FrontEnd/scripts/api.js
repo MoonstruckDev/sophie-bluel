@@ -24,9 +24,9 @@ function resetWorks() {
 
 function RefreshWorks(workId) {
     const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
-    const updatedWorks = currentWorks.filter(work => work.id !== workId);
-    sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
+    const updatedWorks = currentWorks.filter(work => work.id !== parseInt(workId));
 
+    sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
     refreshImages(); 
 }
 
@@ -47,8 +47,6 @@ async function deleteWorks(workId) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log('Work deleted successfully:', data);
         
         RefreshWorks(workId);
 
