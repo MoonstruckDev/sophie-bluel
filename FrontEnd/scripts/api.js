@@ -54,6 +54,8 @@ async function deleteWorks(workId) {
     
         sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
 
+        refreshImages();
+
 
     } catch (error) {
         console.error('Error deleting work:', error.message);

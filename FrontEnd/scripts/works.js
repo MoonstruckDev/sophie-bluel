@@ -23,7 +23,8 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
             deleteButton.textContent = '🙃';
             figure.appendChild(deleteButton);
 
-            deleteButton.addEventListener('click', () => {
+            deleteButton.addEventListener('click', async (e) => {
+                e.preventDefault();
                 deleteWorks(work.id);
             });
         }
