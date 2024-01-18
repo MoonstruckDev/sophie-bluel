@@ -23,21 +23,16 @@ function generateWorks(works, output, includeFigcaption = true, includeButtons =
             deleteButton.textContent = '🙃  ';
             figure.appendChild(deleteButton);
 
-            deleteButton.addEventListener('click', async () => {
-                try {
-                    await deleteWorks(work.id);
-                } catch (error) {
-                    console.error('Error deleting work:', error.message);
-                }
+            deleteButton.addEventListener('click', () => {
+                deleteWorks(work.id);
             });
-            
         }
 
         output.appendChild(figure);
     });
 }
 
-document.addEventListener('DOMContentLoaded', async (e) => {
+document.addEventListener('DOMContentLoaded', async () => {
     try {
         const works = await getWorks();
         generateWorks(works, gallery);
