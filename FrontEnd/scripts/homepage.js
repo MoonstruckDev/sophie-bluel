@@ -24,3 +24,13 @@ showModal.addEventListener('click', () => {
 dialogButton.addEventListener('click', () => {
     dialog.close();
 });
+
+function showAddPhotoSection() {
+    document.querySelector('.modalGallery').style.display = 'none';
+    document.querySelector('.uploadWorks').style.display = 'block';
+  }
+
+  function showWorksSection() {
+    document.querySelector('.uploadWorks').style.display = 'none';
+    document.querySelector('.modalGallery').style.display = 'block';
+  }

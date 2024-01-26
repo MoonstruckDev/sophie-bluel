@@ -454,6 +454,9 @@ dialog {
 	cursor: pointer;
 }
 
+.uploadWorks {
+	display: none;
+}
 
 @keyframes headshake {
     25% {

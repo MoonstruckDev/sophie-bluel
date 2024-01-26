@@ -17,30 +17,6 @@ async function getWorks() {
     }
 }
 
-async function updateGallery(workId) {
-    try {
-        
-        const gallery = document.querySelector('.gallery');
-        const modalGallery = document.querySelector('.modalGallery__container');
-
-        const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
-        const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
-
-        resetWorks(gallery)
-        resetWorks(modalGallery)
-
-        sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
-
-        displayWorks(updatedWorks, gallery);
-        displayWorks(updatedWorks, modalGallery, false, true);
-
-    } catch (error) {
-        console.error('Error refreshing images:', error.message);
-    }
-}
-
-
-
 async function deleteWork(workId) {
     try {
         const authToken = sessionStorage.getItem('token');
@@ -67,3 +43,47 @@ async function deleteWork(workId) {
         console.error('Error deleting work:', error.message);
     }
 }
+
+async function uploadPhoto(formData) {
+    try {
+        const authToken = sessionStorage.getItem('token');
+        const apiUrl = 'http://localhost:5678/api/works';
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        console.log("work added")
+        sessionStorage.removeItem("allWorks")
+
+        const works = getWorks();
+        const worksArray = Array.isArray(works) ? works : [works];
+
+        displayWorks(worksArray, gallery);
+
+    } catch (error) {
+        console.error('Error uploading photo:', error.message);
+    }
+}
+
+document.querySelector('.submitImage').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    try {
+        // Create a FormData object to send the image file
+        const formData = new FormData(this);
+        uploadPhoto(formData);
+
+    } catch (error) {
+        console.error('Error preparing form data:', error.message);
+    }
+});
+

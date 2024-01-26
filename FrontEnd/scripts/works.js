@@ -42,6 +42,29 @@ function resetWorks(targetElement, works = null) {
     }
 }
 
+
+async function updateGallery(workId) {
+    try {
+        
+        const gallery = document.querySelector('.gallery');
+        const modalGallery = document.querySelector('.modalGallery__container');
+
+        const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
+        const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
+
+        resetWorks(gallery)
+        resetWorks(modalGallery)
+
+        sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
+
+        displayWorks(updatedWorks, gallery);
+        displayWorks(updatedWorks, modalGallery, false, true);
+
+    } catch (error) {
+        console.error('Error refreshing images:', error.message);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const works = await getWorks();

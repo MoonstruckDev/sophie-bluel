@@ -51,7 +51,7 @@
 	<section id="portfolio">
 		<dialog id="dialog">
 			<div class="dialog__nav">
-				<button class="dialog__btn">&lt;</button>
+				<button class="dialog__btn" onclick="showWorksSection()">&lt;</button>
 				<button class="dialog__btn">X</button>
 			</div>
 
@@ -59,8 +59,26 @@
 				<h3>Galerie photo</h3>
 				<div class="modalGallery__container"></div>
 			</section>
+			<section class="uploadWorks">
+				<form class="submitImage">
+					<i class="fa-regular fa-image"></i>
+
+					<label for="photo">Choose a photo</label>
+					<input type="file" id="photo" name="image" accept="image/jpeg, image/png">
+				
+					<label for="title">Title</label>
+					<input id="title" type="text" name="title">
+				
+					<label for="category">Category</label>
+					<input id="category" type="number" name="category">
+				
+
+					<input type="submit" value="Valider">
+				</form>
+							
+			</section>
 			<footer class="dialog__bottom">
-				<button class="gallery__btn">Ajouter une photo</button>
+				<button class="gallery__btn" onclick="showAddPhotoSection()">Ajouter une photo</button>
 			</footer>
 		</dialog>
 		
