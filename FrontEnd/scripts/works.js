@@ -22,8 +22,10 @@ function displayWorks(works, output, includeFigcaption = true, includeButtons = 
         if (includeButtons === true) {
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('delete__button');
-            deleteButton.textContent = '🙃';
+            deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
             figure.appendChild(deleteButton);
+            
 
             deleteButton.addEventListener('click', async (e) => {
                 e.preventDefault();

@@ -32,6 +32,5 @@ function getBearerToken() {
 // modifyModal.appendChild(adminicon); // Append the adminicon to the modify__modal div
 // modifyModal.appendChild(adminbutton); // Append the adminbutton to the modify__modal div
 
-debugger
 
 

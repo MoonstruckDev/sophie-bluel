@@ -372,6 +372,10 @@ dialog {
 	display: flex;
 	justify-content: space-between;
 }
+.dialog__btn { background: none; border: none; cursor: pointer;}
+.dialog__btn > i { color: black; font-size: 1rem;}
+
+.back {visibility: hidden;}
 
 .works {
 	padding-top : 1rem;
@@ -424,11 +428,12 @@ dialog {
 
 .modalGallery__container > figure > button {
 	position: absolute;
-	top: .2rem;
-	right: 0;
+	top: .4rem;
+	right: .4rem;
 	font-size: 1rem;
 	border: none;
-	background: none;
+	background: black;
+	border-radius: 20%;
 }
 
 .dialog__bottom {

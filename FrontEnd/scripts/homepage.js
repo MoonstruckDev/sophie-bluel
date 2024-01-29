@@ -1,4 +1,4 @@
-document.addEventListener("userLoggedIn", () => {
+if (isLoggedIn()) {
 
     const adminbuttonContainer = document.querySelector('.project__header > h2');
     const adminbutton = document.createElement("span");
@@ -17,13 +17,32 @@ document.addEventListener("userLoggedIn", () => {
     adminbuttonContainer.after(modifyModal); 
     modifyModal.appendChild(adminicon); 
     modifyModal.appendChild(adminbutton);
-    
-})
+
+
+    const adminContainer = document.createElement("div");
+    adminContainer.classList.add("admin", "admin__header");
+
+    const adminIcon = document.createElement("i");
+    adminIcon.classList.add("fa-solid", "fa-pen-to-square");
+
+    const adminText = document.createElement("span");
+    adminText.innerText = "Mode Édition";
+
+    // Append the elements to the admin container
+    adminContainer.appendChild(adminIcon);
+    adminContainer.appendChild(adminText);
+
+    // Find the header element (adjust the selector if needed)
+    const header = document.querySelector("header");
+
+    // Insert the admin element before the header
+    header.parentNode.insertBefore(adminContainer, header);
+}
 
 
 const showModal = document.querySelector('.modify__modal');
 const dialog = document.querySelector('dialog');
-const dialogButton = document.querySelector('dialog button');
+const dialogButton = document.querySelector('.close');
 const modalGallery = document.querySelector('.modalGallery__container');
 
 
@@ -46,9 +65,11 @@ dialogButton.addEventListener('click', () => {
 function showAddPhotoSection() {
     document.querySelector('.modalGallery').style.display = 'none';
     document.querySelector('.uploadWorks').style.display = 'block';
+    document.querySelector('.back').style.visibility = "visible";
   }
 
   function showWorksSection() {
     document.querySelector('.uploadWorks').style.display = 'none';
     document.querySelector('.modalGallery').style.display = 'block';
+    document.querySelector('.back').style.visibility = "hidden";
   }

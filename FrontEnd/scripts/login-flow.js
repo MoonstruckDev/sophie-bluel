@@ -48,11 +48,13 @@ function isLoggedIn() {
         // User is logged in
         console.log("User is logged in");
         loginButton.textContent = 'logout';
+        return true;
         // Add additional logic for logged-in state if needed
     } else {
         // User is not logged in
         console.log("User is not logged in");
         loginButton.textContent = 'login';
+        return false;
         // Add additional logic for not logged-in state if needed
     }
 }
