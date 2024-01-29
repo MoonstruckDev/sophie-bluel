@@ -1,6 +1,8 @@
 const gallery = document.querySelector('.gallery');
 const works = getWorks();
 
+
+
 function displayWorks(works, output, includeFigcaption = true, includeButtons = false) {
     works.forEach((work) => {
         const figure = document.createElement('figure');

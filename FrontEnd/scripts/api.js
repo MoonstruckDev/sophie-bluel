@@ -34,10 +34,7 @@ async function deleteWork(workId) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-
-
         updateGallery(workId);
-
 
     } catch (error) {
         console.error('Error deleting work:', error.message);
@@ -64,7 +61,7 @@ async function uploadPhoto(formData) {
         console.log("work added")
         sessionStorage.removeItem("allWorks")
 
-        const works = getWorks();
+        const works = await getWorks();
         const worksArray = Array.isArray(works) ? works : [works];
 
         displayWorks(worksArray, gallery);

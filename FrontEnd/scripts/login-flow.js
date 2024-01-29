@@ -1,5 +1,6 @@
 const form = document.querySelector(".login");
 
+
 form.addEventListener("submit", function (event) {
     console.log("Form submitted");
     event.preventDefault();
@@ -46,12 +47,12 @@ function isLoggedIn() {
     if (sessionStorage.getItem('token') !== null) {
         // User is logged in
         console.log("User is logged in");
-        loginButton.textContent = 'Logout';
+        loginButton.textContent = 'logout';
         // Add additional logic for logged-in state if needed
     } else {
         // User is not logged in
         console.log("User is not logged in");
-        loginButton.textContent = 'Login';
+        loginButton.textContent = 'login';
         // Add additional logic for not logged-in state if needed
     }
 }
@@ -76,10 +77,18 @@ function postLogin(loginDetails) {
     .then(data => {
         // Handle the response data here
         console.log("Login successful:", data);
-        sessionStorage.setItem('token', data.token);
-        sessionStorage.setItem('userId', data.userId);
 
+        const token = data.token;
+        const userId = data.userId;
+        
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('userId', userId);
+        
+        const loginEvent = new CustomEvent('userLoggedIn', { detail: { token, userId } });
+        document.dispatchEvent(loginEvent);
+        
         showStatus("Login successful!");
+        
         
         // Add a delay of 2 seconds before calling goHome()
         setTimeout(() => {
