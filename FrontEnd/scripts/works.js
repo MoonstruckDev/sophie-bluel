@@ -37,12 +37,15 @@ function displayWorks(works, output, includeFigcaption = true, includeButtons = 
     });
 }
 
-function resetWorks(targetElement, works = null) {
-    if (works) {
+
+function resetWorks(targetElement, works = null, isModal = false) {
+    if (works && isModal === false) {
         targetElement.innerHTML = '';
         displayWorks(works, targetElement);
-    } else {
+    } 
+    if (works && isModal === true) {
         targetElement.innerHTML = '';
+        displayWorks(works, targetElement, false, true);
     }
 }
 
@@ -56,13 +59,10 @@ async function updateGallery(workId) {
         const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
         const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
 
-        resetWorks(gallery)
-        resetWorks(modalGallery)
+        resetWorks(gallery, updatedWorks)
+        resetWorks(modalGallery, updatedWorks, true)
 
         sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
-
-        displayWorks(updatedWorks, gallery);
-        displayWorks(updatedWorks, modalGallery, false, true);
 
     } catch (error) {
         console.error('Error refreshing images:', error.message);

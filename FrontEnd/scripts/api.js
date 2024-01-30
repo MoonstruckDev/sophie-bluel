@@ -64,20 +64,37 @@ async function uploadPhoto(formData) {
         const works = await getWorks();
         const worksArray = Array.isArray(works) ? works : [works];
 
-        displayWorks(worksArray, gallery);
+
+        resetWorks(gallery, worksArray);
+        resetWorks(modalGallery, worksArray, true);
+       
 
     } catch (error) {
         console.error('Error uploading photo:', error.message);
     }
 }
 
+document.querySelector('#uploadButton').addEventListener('click', function (event) {
+    // Prevent the default click behavior
+    event.preventDefault();
+
+    // Trigger click on the file input
+    document.getElementById('photo').click();
+});
+
 document.querySelector('.submitImage').addEventListener('submit', function (event) {
     event.preventDefault();
 
     try {
-        // Create a FormData object to send the image file
         const formData = new FormData(this);
         uploadPhoto(formData);
+        this.reset();
+          // Reset the image container to show the icon
+          const label = document.querySelector(".fa-regular");
+          const uploadContainer = document.querySelector(".uploadButtons");
+          label.style.display = "block";
+          uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
+                                     <p class="uploadCriteria">jpg, png : 4mo max</p>`;
 
     } catch (error) {
         console.error('Error preparing form data:', error.message);

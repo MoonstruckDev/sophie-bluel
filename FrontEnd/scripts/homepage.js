@@ -72,10 +72,69 @@ function showAddPhotoSection() {
     document.querySelector('.modalGallery').style.display = 'none';
     document.querySelector('.uploadWorks').style.display = 'block';
     document.querySelector('.back').style.visibility = "visible";
+    document.querySelector('.dialog__bottom').style.display = "none"
   }
 
   function showWorksSection() {
     document.querySelector('.uploadWorks').style.display = 'none';
     document.querySelector('.modalGallery').style.display = 'block';
     document.querySelector('.back').style.visibility = "hidden";
+    document.querySelector('.dialog__bottom').style.display = ""
   }
+
+  const uploadButton = document.getElementById('uploadButton');
+  const imagePlaceholder = document.getElementById('imagePlaceholder');
+  const photoInput = document.getElementById('photo');
+
+  // Open file browser when clicking the button
+  uploadButton.addEventListener('click', () => {
+    photoInput.click();
+  });
+
+  document.getElementById('photo').addEventListener('change', function(event) {
+    const label = document.querySelector(".fa-regular")
+    const uploadContainer = document.querySelector(".uploadButtons")
+    const file = event.target.files[0];
+    
+
+    if (file) {
+        const imageURL = URL.createObjectURL(file);
+        label.style.display = "none";
+        uploadContainer.innerHTML = ""
+        uploadContainer.innerHTML = `<img src="${imageURL}" alt="Selected Image" id="selectedImage">`;
+    }
+});
+
+
+function closeToast(event) {
+	let toastClose = event.target;
+	toastClose.closest('.toast-container').remove();
+}
+function closeToastDuration() {
+	if (document.querySelectorAll('.toast-container')) {
+		let toasts = document.querySelectorAll('.toast-container');
+		toasts.forEach(toast => {
+			setTimeout(() => {
+				toast.remove();
+			}, 10000);
+		});
+	}
+}
+closeToastDuration();
+if (document.getElementById('toast-container')) {
+	let mutationObserver = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			closeToastDuration();
+		});
+	});
+	mutationObserver.observe(document.getElementById('toast-container'), {
+		attributes: true,
+		characterData: true,
+		childList: true,
+		subtree: true,
+		attributeOldValue: true,
+		characterDataOldValue: true
+	});
+}
+  
+
