@@ -4,7 +4,7 @@ if (isLoggedIn()) {
     const adminbutton = document.createElement("span");
     const adminicon = document.createElement("i");
     const modifyModal = document.createElement("div"); // Create the modify__modal div
-    
+
     adminicon.classList.add("fa-solid", "fa-pen-to-square");
     adminicon.style.color = "black";
     adminbutton.innerText = "Modifier";
@@ -28,15 +28,21 @@ if (isLoggedIn()) {
     const adminText = document.createElement("span");
     adminText.innerText = "Mode Édition";
 
+    const spacer = document.createElement("div")
+    spacer.classList.add("spacer")
+
     // Append the elements to the admin container
     adminContainer.appendChild(adminIcon);
     adminContainer.appendChild(adminText);
+    adminContainer.appendChild(spacer);
 
     // Find the header element (adjust the selector if needed)
     const header = document.querySelector("header");
 
     // Insert the admin element before the header
     header.parentNode.insertBefore(adminContainer, header);
+
+    header.style.margin = "6.75rem 0 3.125rem 0";
 }
 
 

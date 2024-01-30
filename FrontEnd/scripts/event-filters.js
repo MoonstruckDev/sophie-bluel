@@ -32,20 +32,21 @@ getWorks()
       liElement.appendChild(button);
       ulElement.appendChild(liElement);
     });
+
+    // Move the event listeners inside the .then() block
+    function handleFilterClick(categoryId) {
+      console.log(`Filtering works for category ID: ${categoryId}`);
+
+      resetWorks(gallery, categoryId === "All" ? allWorks : null);
+
+      if (categoryId !== "All") {
+        const filteredWorks = allWorks.filter(
+          (work) => work.categoryId === categoryId
+        );
+        displayWorks(filteredWorks, gallery);
+      }
+    }
   })
   .catch((error) => {
     throw new Error(error);
   });
-
-function handleFilterClick(categoryId) {
-  console.log(`Filtering works for category ID: ${categoryId}`);
-
-  resetWorks(gallery, categoryId === "All" ? allWorks : null); // Clear the gallery and display all works if categoryId is "All"
-
-  if (categoryId !== "All") {
-    const filteredWorks = allWorks.filter(
-      (work) => work.categoryId === categoryId
-    );
-    displayWorks(filteredWorks, gallery); // Display filtered works
-  }
-}

@@ -59,8 +59,9 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 3.75rem 0 3.125rem 0
 }
+
 section {
 	margin: 50px 0
 }
@@ -274,9 +275,9 @@ footer nav ul {
 	margin: auto;
 }
 
-/* .login input[type="email"] {
-	transition: background-color 0.5s;
-}  */
+.login__button {
+	text-decoration: none;
+}
 
 .login input:not(:focus):not(:placeholder-shown):invalid {
 	border: 2px solid red;
@@ -462,6 +463,14 @@ dialog {
 .uploadWorks {
 	display: none;
 }
+
+html { position: relative;}
+.admin__header { 
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 1.5rem;
+} 
 
 @keyframes headshake {
     25% {
