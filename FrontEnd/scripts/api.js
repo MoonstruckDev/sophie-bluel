@@ -96,6 +96,10 @@ document.querySelector('.submitImage').addEventListener('submit', function (even
           uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
                                      <p class="uploadCriteria">jpg, png : 4mo max</p>`;
 
+          createToast("Ajout Image", "Success")
+          closeToastDuration();
+          
+
     } catch (error) {
         console.error('Error preparing form data:', error.message);
     }

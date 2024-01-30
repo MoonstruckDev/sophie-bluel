@@ -48,7 +48,7 @@ table {
 }
 /** end reset css**/
 
-body {
+.main__container {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
@@ -597,16 +597,18 @@ input[type=number] {
 }
 
 .toast-container {
-	position: absolute;
-	width: 20rem;
-	height: 5rem;
-	right: 0;
-	background-color: green;
-
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    width: 20rem;
+    height: 5rem;
+    top: 10rem;
+    left: 0;
+    background-color: green;
 }
+
 
 .toast-container > i {
 	font-size: 2.5rem;	
@@ -625,12 +627,14 @@ input[type=number] {
 	color: white;
 }
 
+
 .toast-duration {
 	position: absolute;
 	bottom: 0;
 	height: 3px;
 	width: 100%;
 	background-color: darkgreen;
+
 	&::after {
 		display: block;
 		content: '';

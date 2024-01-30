@@ -79,3 +79,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+function createToast(titlecontent, textcontent) {
+    // Create the elements for the toast
+    const toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container';
+
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-bread-slice';
+
+    const toastTextContainer = document.createElement('div');
+    toastTextContainer.className = 'toast__text';
+
+    const title = document.createElement('h2');
+    title.className = 'toast--title';
+    title.textContent = titlecontent;
+
+    const text = document.createElement('p');
+    text.className = 'toast--text';
+    text.textContent = textcontent;
+
+    const duration = document.createElement('div');
+    duration.className = 'toast-duration';
+
+    // Append the elements to the container
+    toastTextContainer.appendChild(title);
+    toastTextContainer.appendChild(text);
+
+    toastContainer.appendChild(icon);
+    toastContainer.appendChild(toastTextContainer);
+    toastContainer.appendChild(duration);
+
+   
+    document.body.insertAdjacentElement('afterbegin', toastContainer);
+
+}
+
