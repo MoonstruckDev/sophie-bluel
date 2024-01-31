@@ -1,22 +1,4 @@
-import { logout } from './admin.js'; 
-
-export function isLoggedIn() {
-    const loginButton = document.querySelector('.login__button');
-
-    if (sessionStorage.getItem('token') !== null) {
-        // User is logged in
-        console.log("User is logged in");
-        loginButton.textContent = 'logout';
-        return true;
-        // Add additional logic for logged-in state if needed
-    } else {
-        // User is not logged in
-        console.log("User is not logged in");
-        loginButton.textContent = 'login';
-        return false;
-        // Add additional logic for not logged-in state if needed
-    }
-}
+import { isLoggedIn } from './login-flow.js';
 
 if (isLoggedIn()) {
 
