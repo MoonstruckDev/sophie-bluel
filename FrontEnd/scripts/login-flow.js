@@ -1,19 +1,23 @@
+import { logout } from './admin.js'; 
+
+
 const form = document.querySelector(".login");
 
+if (window.location.pathname.endsWith("/login.html")) {
+    form.addEventListener("submit", function (event) {
+        console.log("Form submitted");
+        event.preventDefault();
+        const formData = new FormData(form);
+        const userData = {
+          email: formData.get('email'),
+          password: formData.get('password'),
+        };
+    
+        postLogin(userData);
+    });
+}
 
-form.addEventListener("submit", function (event) {
-    console.log("Form submitted");
-    event.preventDefault();
-    const formData = new FormData(form);
-    const userData = {
-      email: formData.get('email'),
-      password: formData.get('password'),
-    };
-
-    postLogin(userData);
-});
-
-function showStatus(message, isError = false) {
+export function showStatus(message, isError = false) {
     const statusWrapper = document.querySelector('.status__wrapper');
     const status = document.querySelector('.status');
     const statusIcon = document.querySelector('.status__wrapper i');
@@ -29,19 +33,14 @@ function showStatus(message, isError = false) {
     // Use the provided message or default to 'HTTP error'
     const displayMessage = message || 'HTTP error';
     status.textContent = displayMessage;
-
-    // // Hide the status message after 2 seconds
-    // setTimeout(() => {
-    //     statusWrapper.classList.add('hidden');
-    // }, 2000);
 }
 
 
-function goHome() {
+export function goHome() {
     window.location.href = 'index.html';
 }
 
-function isLoggedIn() {
+export function isLoggedIn() {
     const loginButton = document.querySelector('.login__button');
 
     if (sessionStorage.getItem('token') !== null) {
@@ -59,8 +58,7 @@ function isLoggedIn() {
     }
 }
 
-
-function postLogin(loginDetails) {
+export function postLogin(loginDetails) {
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         body: JSON.stringify(loginDetails),
@@ -86,9 +84,6 @@ function postLogin(loginDetails) {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('userId', userId);
         
-        const loginEvent = new CustomEvent('userLoggedIn', { detail: { token, userId } });
-        document.dispatchEvent(loginEvent);
-        
         showStatus("Login successful!");
         
         
@@ -96,7 +91,9 @@ function postLogin(loginDetails) {
         setTimeout(() => {
             goHome();
         }, 2000);
-        isLoggedIn();
+
+
+
     })
     .catch(error => {
         // Handle errors here
@@ -108,6 +105,22 @@ function postLogin(loginDetails) {
         }
     });
 }
+
+const loginButton = document.querySelector('.login__button');
+loginButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (loginButton.textContent == "logout") {
+        logout();
+        loginButton.textContent = "login";
+
+        // Remove elements with class "admin"
+        document.querySelectorAll(".admin").forEach(function(element) {
+            element.remove();
+        });
+
+    }
+    else window.location.href = "login.html";
+} )
 
 
 

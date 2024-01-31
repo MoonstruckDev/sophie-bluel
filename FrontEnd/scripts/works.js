@@ -1,9 +1,8 @@
-const gallery = document.querySelector('.gallery');
-const works = getWorks();
+import { getWorks, deleteWork } from './api.js';
 
+export const gallery = document.querySelector('.gallery');
 
-
-function displayWorks(works, output, includeFigcaption = true, includeButtons = false) {
+export function displayWorks(works, output, includeFigcaption = true, includeButtons = false) {
     works.forEach((work) => {
         const figure = document.createElement('figure');
         
@@ -38,19 +37,19 @@ function displayWorks(works, output, includeFigcaption = true, includeButtons = 
 }
 
 
-function resetWorks(targetElement, works = null, isModal = false) {
-    if (works && isModal === false) {
+export function resetWorks(targetElement, isModal, works) {
+    if (isModal === false) {
         targetElement.innerHTML = '';
         displayWorks(works, targetElement);
     } 
-    if (works && isModal === true) {
+    if (isModal === true) {
         targetElement.innerHTML = '';
         displayWorks(works, targetElement, false, true);
     }
 }
 
 
-async function updateGallery(workId) {
+export async function updateGallery(workId) {
     try {
         
         const gallery = document.querySelector('.gallery');
@@ -59,8 +58,8 @@ async function updateGallery(workId) {
         const currentWorks = JSON.parse(sessionStorage.getItem('allWorks'));
         const updatedWorks = currentWorks.filter(work => parseInt(work.id) !== workId);
 
-        resetWorks(gallery, updatedWorks)
-        resetWorks(modalGallery, updatedWorks, true)
+        resetWorks(gallery, false, updatedWorks)
+        resetWorks(modalGallery, true, updatedWorks)
 
         sessionStorage.setItem('allWorks', JSON.stringify(updatedWorks));
 
@@ -79,38 +78,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-function createToast(titlecontent, textcontent) {
-    // Create the elements for the toast
-    const toastContainer = document.createElement('div');
-    toastContainer.className = 'toast-container';
-
-    const icon = document.createElement('i');
-    icon.className = 'fa-solid fa-bread-slice';
-
-    const toastTextContainer = document.createElement('div');
-    toastTextContainer.className = 'toast__text';
-
-    const title = document.createElement('h2');
-    title.className = 'toast--title';
-    title.textContent = titlecontent;
-
-    const text = document.createElement('p');
-    text.className = 'toast--text';
-    text.textContent = textcontent;
-
-    const duration = document.createElement('div');
-    duration.className = 'toast-duration';
-
-    // Append the elements to the container
-    toastTextContainer.appendChild(title);
-    toastTextContainer.appendChild(text);
-
-    toastContainer.appendChild(icon);
-    toastContainer.appendChild(toastTextContainer);
-    toastContainer.appendChild(duration);
-
-   
-    document.body.insertAdjacentElement('afterbegin', toastContainer);
-
-}
 

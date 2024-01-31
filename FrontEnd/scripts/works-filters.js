@@ -1,3 +1,7 @@
+import { getWorks } from './api.js';
+import { resetWorks, gallery } from './works.js';
+
+
 getWorks()
   .then((allWorks) => {
     const uniqueCategoryIds = [
@@ -33,17 +37,20 @@ getWorks()
       ulElement.appendChild(liElement);
     });
 
+
     // Move the event listeners inside the .then() block
     function handleFilterClick(categoryId) {
       console.log(`Filtering works for category ID: ${categoryId}`);
 
-      resetWorks(gallery, categoryId === "All" ? allWorks : null);
-
+      if (categoryId === "All") {
+        resetWorks(gallery, false, allWorks);
+      }
       if (categoryId !== "All") {
         const filteredWorks = allWorks.filter(
           (work) => work.categoryId === categoryId
         );
-        displayWorks(filteredWorks, gallery);
+
+        resetWorks(gallery, false, filteredWorks);
       }
     }
   })

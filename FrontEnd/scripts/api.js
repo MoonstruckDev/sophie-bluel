@@ -1,4 +1,7 @@
-async function getWorks() {
+import { updateGallery, resetWorks, gallery} from './works.js';
+import { modalGallery } from './modal.js';
+
+export async function getWorks() {
     try {
         const cachedItems = sessionStorage.getItem('allWorks');
         
@@ -17,7 +20,7 @@ async function getWorks() {
     }
 }
 
-async function deleteWork(workId) {
+export async function deleteWork(workId) {
     try {
         const authToken = sessionStorage.getItem('token');
         const apiUrl = `http://localhost:5678/api/works/${workId}`;
@@ -41,7 +44,7 @@ async function deleteWork(workId) {
     }
 }
 
-async function uploadPhoto(formData) {
+export async function uploadPhoto(formData) {
     try {
         const authToken = sessionStorage.getItem('token');
         const apiUrl = 'http://localhost:5678/api/works';
@@ -65,8 +68,8 @@ async function uploadPhoto(formData) {
         const worksArray = Array.isArray(works) ? works : [works];
 
 
-        resetWorks(gallery, worksArray);
-        resetWorks(modalGallery, worksArray, true);
+        resetWorks(gallery, false, worksArray);
+        resetWorks(modalGallery, true, worksArray);
        
 
     } catch (error) {
@@ -74,34 +77,5 @@ async function uploadPhoto(formData) {
     }
 }
 
-document.querySelector('#uploadButton').addEventListener('click', function (event) {
-    // Prevent the default click behavior
-    event.preventDefault();
 
-    // Trigger click on the file input
-    document.getElementById('photo').click();
-});
-
-document.querySelector('.submitImage').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    try {
-        const formData = new FormData(this);
-        uploadPhoto(formData);
-        this.reset();
-          // Reset the image container to show the icon
-          const label = document.querySelector(".fa-regular");
-          const uploadContainer = document.querySelector(".uploadButtons");
-          label.style.display = "block";
-          uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
-                                     <p class="uploadCriteria">jpg, png : 4mo max</p>`;
-
-          createToast("Ajout Image", "Success")
-          closeToastDuration();
-          
-
-    } catch (error) {
-        console.error('Error preparing form data:', error.message);
-    }
-});
 
