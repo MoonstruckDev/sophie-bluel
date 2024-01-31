@@ -1,5 +1,5 @@
 
-export function createToast(titlecontent, textcontent) {
+export function createToast(titlecontent, textcontent, color) {
     // Create the elements for the toast
     const toastContainer = document.createElement('div');
     toastContainer.className = 'toast-container';
@@ -28,6 +28,7 @@ export function createToast(titlecontent, textcontent) {
     toastContainer.appendChild(icon);
     toastContainer.appendChild(toastTextContainer);
     toastContainer.appendChild(duration);
+	toastContainer.style.backgroundColor = color;
 
    
     document.body.insertAdjacentElement('afterbegin', toastContainer);
@@ -45,7 +46,7 @@ export function closeToastDuration() {
 		toasts.forEach(toast => {
 			setTimeout(() => {
 				toast.remove();
-			}, 10000);
+			}, 5000);
 		});
 	}
 }

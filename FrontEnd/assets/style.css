@@ -376,6 +376,7 @@ body {
 
 .admin__header {
     display: flex;
+	gap: 1rem;
     justify-content: center;
     background-color: black;
     width: 100%;
@@ -391,6 +392,13 @@ body {
 
 .admin__header > span, i {
     color: white;
+	font-family: 'Work Sans';
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 19px;
+	letter-spacing: 0em;
+	text-align: center;
+
 }
 
 /* Project Header Styles */
@@ -401,7 +409,7 @@ body {
     gap: 1rem;
 }
 
-.modify_modal:hover {
+.modify_modal:hover, .modify__modal > * {
     cursor: pointer;
 }
 
@@ -529,6 +537,8 @@ dialog {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+	padding: 0 7rem;
+
 }
 
 .upload__container {
@@ -616,6 +626,7 @@ dialog > section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
 }
 
 .attributeArea > input[type=text], select {
@@ -651,7 +662,7 @@ input[type=number] {
     align-items: center;
     position: -webkit-sticky;
     position: sticky;
-    width: 20rem;
+    width: 18rem;
     height: 5rem;
     top: 10rem;
     left: 0;
@@ -668,9 +679,14 @@ input[type=number] {
 }
 
 .toast__text > h2 {
-    font-family: 'Work Sans';
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 400;
+    color: white;
+}
+
+.toast__text > p {
+	font-family: 'Work Sans';
+    font-size: .8rem;
     color: white;
 }
 
@@ -680,7 +696,7 @@ input[type=number] {
     bottom: 0;
     height: 3px;
     width: 100%;
-    background-color: darkgreen;
+    background-color: grey;
 
     &::after {
         display: block;
@@ -690,9 +706,9 @@ input[type=number] {
         left: 0;
         width: 0%;
         height: inherit;
-        background-color: greenyellow;
+        background-color: white;
         animation-name: toastDuration;
-        animation-duration: 10s;
+        animation-duration: 5s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
     }

@@ -1,6 +1,6 @@
 import { getWorks } from './api.js';
+import { isLoggedIn } from './login-flow.js';
 import { resetWorks, gallery } from './works.js';
-
 
 getWorks()
   .then((allWorks) => {
@@ -14,6 +14,7 @@ getWorks()
     allButton.addEventListener("click", () => handleFilterClick("All"));
 
     const ulElement = document.createElement("ul");
+    ulElement.classList.add("filter__list");
 
     const allLiElement = document.createElement("li");
     allLiElement.appendChild(allButton);
@@ -37,6 +38,10 @@ getWorks()
       ulElement.appendChild(liElement);
     });
 
+    // Apply hidden style if logged in
+    if (isLoggedIn()) {
+      ulElement.style.display = "none";
+    }
 
     // Move the event listeners inside the .then() block
     function handleFilterClick(categoryId) {

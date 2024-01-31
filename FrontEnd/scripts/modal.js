@@ -14,6 +14,7 @@ const dialogButton = document.querySelector('.close');
 if (isLoggedIn()) { 
     showModal.addEventListener('click', () => {
         dialog.showModal();
+        showWorksSection();
     
         if (modalGallery.children.length === 0) {
             getWorks()
@@ -69,8 +70,6 @@ if (isLoggedIn()) {
     document.querySelector('#uploadButton').addEventListener('click', function (event) {
         // Prevent the default click behavior
         event.preventDefault();
-    
-        // Trigger click on the file input
         document.getElementById('photo').click();
     });
     
@@ -81,13 +80,15 @@ if (isLoggedIn()) {
             const formData = new FormData(this);
             uploadPhoto(formData);
             this.reset();
+            dialog.close();
     
             // Reset the image container to show the icon
             const label = document.querySelector(".fa-regular");
+            label.style.display = "flex";
             const uploadContainer = document.querySelector(".uploadButtons");
-            label.style.display = "block";
             uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
-                                         <p class="uploadCriteria">jpg, png : 4mo max</p>`;
+                                         <p class="uploadCriteria">jpg, png : 4mo max</p>
+                                         <div id="selectedImage"></div>`;
     
             // Clear the selected image if it exists
             const selectedImageContainer = document.getElementById("selectedImage");
@@ -95,8 +96,9 @@ if (isLoggedIn()) {
                 selectedImageContainer.innerHTML = "";
             }
     
-            createToast("Ajout Image", "Success");
-            closeToastDuration();
+            createToast("Image ajoutée avec succès", "Succès", "green");
+   
+         
         } catch (error) {
             console.error('Error handling form submission:', error.message);
         }

@@ -1,4 +1,5 @@
 import { getWorks, deleteWork } from './api.js';
+import { closeToastDuration, createToast } from './toasts.js';
 
 export const gallery = document.querySelector('.gallery');
 
@@ -29,6 +30,8 @@ export function displayWorks(works, output, includeFigcaption = true, includeBut
             deleteButton.addEventListener('click', async (e) => {
                 e.preventDefault();
                 deleteWork(work.id);
+                createToast('Suppression réussie', 'L\'image a bien été supprimée', 'red');
+                closeToastDuration();
             });
         }
 

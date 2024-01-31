@@ -5,7 +5,7 @@ if (isLoggedIn()) {
     const adminbuttonContainer = document.querySelector('.project__header > h2');
     const adminbutton = document.createElement("span");
     const adminicon = document.createElement("i");
-    const modifyModal = document.createElement("div"); // Create the modify__modal div
+    const modifyModal = document.createElement("div");
 
     adminicon.classList.add("fa-solid", "fa-pen-to-square");
     adminicon.style.color = "black";
@@ -44,8 +44,6 @@ if (isLoggedIn()) {
 
     // Insert the admin element before the header
     document.body.insertBefore(adminContainer, document.body.firstChild);
-
-
 }
 
 
