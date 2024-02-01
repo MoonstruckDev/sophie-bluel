@@ -391,6 +391,7 @@ body {
 
 dialog {
     border: none;
+    border-radius: .5rem;
 }
 
 /* Project Title and Modify Modal Styles */
