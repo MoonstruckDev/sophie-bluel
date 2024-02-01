@@ -62,8 +62,6 @@ if (isLoggedIn()) {
             title.value = file.name;
             label.style.display = "none";
             uploadContainer.innerHTML = `<img src="${imageURL}" alt="Selected Image" id="selectedImage">`;
-            // Set the file name as the inner text of the input element
-            document.getElementById('photo').value = file.name;
         }
     });
     
@@ -129,3 +127,9 @@ if (isLoggedIn()) {
       
 }
 
+dialog.addEventListener('click', (event) => {
+    console.log(event.target.id)
+    if (event.target.id === 'dialog') {
+        dialog.close();
+    }
+});
