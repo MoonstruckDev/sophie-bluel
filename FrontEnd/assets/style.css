@@ -672,8 +672,9 @@ dialog > section {
     height: 3px;
     width: 100%;
     background-color: grey;
+}
 
-    &::after {
+.toast-duration::after {
         display: block;
         content: '';
         position: absolute;
@@ -686,8 +687,8 @@ dialog > section {
         animation-duration: 5s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
-    }
 }
+
 
 /* Keyframe Animation */
 @keyframes headshake {
@@ -695,7 +696,7 @@ dialog > section {
         transform: translateX(2%);
     }
     75% {
-        transform: translateX(2% * -1);
+        transform: translateX(-2%);
     }
 }
 
