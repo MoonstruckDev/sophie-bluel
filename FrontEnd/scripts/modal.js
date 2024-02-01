@@ -51,16 +51,18 @@ if (isLoggedIn()) {
         photoInput.click();
       });
     
+
+    const label = document.querySelector(".uploadArea");
+
     document.getElementById('photo').addEventListener('change', function(event) {
-        const label = document.querySelector(".fa-regular");
-        const uploadContainer = document.querySelector(".uploadButtons");
+        const uploadContainer = document.querySelector(".selectedImage");
         const file = event.target.files[0];
         const title = document.getElementById("title");
     
         if (file) {
             const imageURL = URL.createObjectURL(file);
             title.value = file.name;
-            label.style.display = "none";
+            label.classList.add("has-image");
             uploadContainer.innerHTML = `<img src="${imageURL}" alt="Selected Image" id="selectedImage">`;
         }
     });
@@ -80,19 +82,19 @@ if (isLoggedIn()) {
             this.reset();
             dialog.close();
     
-            // Reset the image container to show the icon
-            const label = document.querySelector(".fa-regular");
-            label.style.display = "flex";
-            const uploadContainer = document.querySelector(".uploadButtons");
-            uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
-                                         <p class="uploadCriteria">jpg, png : 4mo max</p>
-                                         <div id="selectedImage"></div>`;
-    
-            // Clear the selected image if it exists
-            const selectedImageContainer = document.getElementById("selectedImage");
+            const selectedImageContainer = document.querySelector(".selectedImage");
             if (selectedImageContainer) {
                 selectedImageContainer.innerHTML = "";
             }
+            // Reset the image container to show the icon
+            label.classList.remove("has-image")
+            // const uploadContainer = document.querySelector(".uploadButtons");
+            // uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
+            //                              <p class="uploadCriteria">jpg, png : 4mo max</p>
+            //                              <div id="selectedImage"></div>`;
+    
+            // Clear the selected image if it exists
+
     
             createToast("Image ajoutée avec succès", "Succès", "green");
    

@@ -467,6 +467,7 @@ dialog {
     border: none;
 }
 
+.modalGallery { padding: 0 6.5rem;}
 /* Modal Gallery Styles */
 .modalGallery > h3 {
     color: black;
@@ -482,7 +483,6 @@ dialog {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: .5rem;
     grid-row-gap: .5rem;
-    padding: 0 104px;
 }
 
 .modalGallery__container img {
@@ -517,6 +517,12 @@ dialog {
     content: '';
     margin: 2rem 0;
     display: block;
+    width: 68%;
+    height: 1px;
+    background-color: black;
+}
+
+.spacer {
     width: 100%;
     height: 1px;
     background-color: black;
@@ -539,6 +545,12 @@ dialog {
     gap: 2rem;
 	padding: 0 7rem;
 
+}
+
+.uploadArea.has-image button,
+.uploadArea.has-image i,
+.uploadArea.has-image p.uploadCriteria {
+    display: none;
 }
 
 .upload__container {

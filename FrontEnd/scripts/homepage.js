@@ -31,13 +31,9 @@ if (isLoggedIn()) {
     const adminText = document.createElement("span");
     adminText.innerText = "Mode Édition";
 
-    const spacer = document.createElement("div")
-    spacer.classList.add("spacer")
-
     // Append the elements to the admin container
     adminContainer.appendChild(adminIcon);
     adminContainer.appendChild(adminText);
-    adminContainer.appendChild(spacer);
 
     // Find the header element (adjust the selector if needed)
   
