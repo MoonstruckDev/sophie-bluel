@@ -345,30 +345,6 @@ a:visited {
     color: inherit; /* Use the default text color for visited links */
 }
 
-.login .status__wrapper {
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    color: white;
-}
-
-.login .status__wrapper.error {
-    background-color: red;
-}
-
-.login .status__wrapper.success {
-    background-color: green;
-}
-
-.status__wrapper > i {
-    padding: 0 .5rem;
-}
-
-.status__wrapper.hidden {
-    display: none;
-}
-
 /* Admin Header Styles */
 body {
     position: relative;

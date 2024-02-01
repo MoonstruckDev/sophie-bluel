@@ -1,4 +1,5 @@
 import { logout } from './admin.js'; 
+import { closeToastDuration, createToast } from './toasts.js';
 
 
 const form = document.querySelector(".login");
@@ -16,25 +17,6 @@ if (window.location.pathname.endsWith("/login.html")) {
         postLogin(userData);
     });
 }
-
-export function showStatus(message, isError = false) {
-    const statusWrapper = document.querySelector('.status__wrapper');
-    const status = document.querySelector('.status');
-    const statusIcon = document.querySelector('.status__wrapper i');
-
-    // Determine the appropriate styles based on error or success
-    const statusClass = isError ? 'error' : 'success';
-    statusWrapper.classList.remove('hidden', 'error', 'success');
-    statusWrapper.classList.add(statusClass);
-
-    // Set the appropriate icon based on error or success
-    statusIcon.className = isError ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-check';
-
-    // Use the provided message or default to 'HTTP error'
-    const displayMessage = message || 'HTTP error';
-    status.textContent = displayMessage;
-}
-
 
 export function goHome() {
     window.location.href = 'index.html';
@@ -68,7 +50,9 @@ export function postLogin(loginDetails) {
     })
     .then(response => {
         if (!response.ok) {
-            showStatus(response.statusText, true);
+            createToast("Error", response.statusText, "red");
+            closeToastDuration();
+            
             console.log(response.statusText);
             throw new Error(`Error: ${response.statusText}`);
         }
@@ -84,7 +68,7 @@ export function postLogin(loginDetails) {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('userId', userId);
         
-        showStatus("Login successful!");
+        createToast("Success", "Login successful!", "green");
         
         
         // Add a delay of 2 seconds before calling goHome()
