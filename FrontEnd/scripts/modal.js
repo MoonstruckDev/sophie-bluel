@@ -1,6 +1,6 @@
 import { getWorks, uploadPhoto } from './api.js';
 import { displayWorks } from './works.js';
-import { createToast, closeToastDuration } from './toasts.js';
+import { createToast } from './toasts.js';
 import { isLoggedIn } from './login-flow.js';
 
 
@@ -28,15 +28,22 @@ if (isLoggedIn()) {
     dialogButton.addEventListener('click', () => {
         dialog.close();
     });
-    
-    window.showAddPhotoSection = function() {
+
+    document.querySelector(".back").addEventListener('click', () => {
+        showWorksSection();  
+    }) 
+    document.querySelector(".gallery__btn").addEventListener('click', () => {
+        showAddPhotoSection();  
+    }) 
+
+    function showAddPhotoSection() {
         document.querySelector('.modalGallery').style.display = 'none';
         document.querySelector('.uploadWorks').style.display = 'block';
         document.querySelector('.back').style.visibility = "visible";
         document.querySelector('.dialog__bottom').style.display = "none"
       }
     
-    window.showWorksSection = function() {
+    function showWorksSection() {
         document.querySelector('.uploadWorks').style.display = 'none';
         document.querySelector('.modalGallery').style.display = 'block';
         document.querySelector('.back').style.visibility = "hidden";
@@ -86,16 +93,8 @@ if (isLoggedIn()) {
             if (selectedImageContainer) {
                 selectedImageContainer.innerHTML = "";
             }
-            // Reset the image container to show the icon
-            label.classList.remove("has-image")
-            // const uploadContainer = document.querySelector(".uploadButtons");
-            // uploadContainer.innerHTML = `<button id="uploadButton">+ Ajouter Photo</button>
-            //                              <p class="uploadCriteria">jpg, png : 4mo max</p>
-            //                              <div id="selectedImage"></div>`;
-    
-            // Clear the selected image if it exists
 
-    
+            label.classList.remove("has-image")
             createToast("Image ajoutée avec succès", "Succès", "green");
    
          
