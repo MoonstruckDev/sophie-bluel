@@ -625,19 +625,6 @@ dialog > section {
     box-shadow: 0px 4px 14px 0px #00000017;
 }
 
-/* Input Number Styles */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
 #selectedImage {
     max-width: 100%;
     max-height: 200px;
