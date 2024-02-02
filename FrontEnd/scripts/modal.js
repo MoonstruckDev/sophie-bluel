@@ -66,7 +66,7 @@ if (isLoggedIn()) {
         const file = event.target.files[0];
         const title = document.getElementById("title");
         const uploadCriteria = document.querySelector('.uploadCriteria');
-        
+
         if (file) {
             const imageURL = URL.createObjectURL(file);
             title.value = file.name;
@@ -96,11 +96,9 @@ if (isLoggedIn()) {
             this.reset();
             dialog.close();
     
-            const selectedImageContainer = document.querySelector(".selectedImage");
+            const selectedImageContainer = document.querySelector("#selectedImage");
             if (selectedImageContainer) {
-                selectedImageContainer.src = "";
-                selectedImageContainer.alt = "";
-                selectedImageContainer.id = "";
+                selectedImageContainer.remove();
             }
 
             label.classList.remove("has-image")

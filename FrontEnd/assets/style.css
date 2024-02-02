@@ -526,7 +526,7 @@ dialog {
 
 .uploadArea.has-image button,
 .uploadArea.has-image i,
-.uploadArea.has-image p.uploadCriteria {
+.uploadArea.has-image span.uploadCriteria {
     display: none;
 }
 
