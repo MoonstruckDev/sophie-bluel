@@ -1,6 +1,6 @@
 import { getWorks, uploadPhoto } from './api.js';
 import { displayWorks } from './works.js';
-import { createToast } from './toasts.js';
+import { closeToastDuration, createToast } from './toasts.js';
 import { isLoggedIn } from './login-flow.js';
 
 
@@ -62,15 +62,22 @@ if (isLoggedIn()) {
     const label = document.querySelector(".uploadArea");
 
     document.getElementById('photo').addEventListener('change', function(event) {
-        const uploadContainer = document.querySelector(".selectedImage");
+
         const file = event.target.files[0];
         const title = document.getElementById("title");
-    
+        const uploadCriteria = document.querySelector('.uploadCriteria');
+        
         if (file) {
             const imageURL = URL.createObjectURL(file);
             title.value = file.name;
             label.classList.add("has-image");
-            uploadContainer.innerHTML = `<img src="${imageURL}" alt="Selected Image" id="selectedImage">`;
+
+            const previewImage = document.createElement("img");
+            previewImage.src = imageURL;
+            previewImage.id = "selectedImage";
+            previewImage.alt = "Selected Image";
+
+            uploadCriteria.parentNode.insertBefore(previewImage, uploadCriteria.nextSibling);
         }
     });
     
@@ -91,11 +98,14 @@ if (isLoggedIn()) {
     
             const selectedImageContainer = document.querySelector(".selectedImage");
             if (selectedImageContainer) {
-                selectedImageContainer.innerHTML = "";
+                selectedImageContainer.src = "";
+                selectedImageContainer.alt = "";
+                selectedImageContainer.id = "";
             }
 
             label.classList.remove("has-image")
             createToast("Image ajoutée avec succès", "Succès", "green");
+            closeToastDuration();
    
          
         } catch (error) {
