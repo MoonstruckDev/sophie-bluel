@@ -691,6 +691,20 @@ dialog > section {
 }
 
 
+a, .forgotten {
+    text-decoration: none;
+    color: black;
+}
+.forgotten {
+        font-family: "Work Sans";
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: center;
+}
+
+
 /* Keyframe Animation */
 @keyframes headshake {
     25% {

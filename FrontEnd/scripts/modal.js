@@ -50,23 +50,25 @@ if (isLoggedIn()) {
         document.querySelector('.dialog__bottom').style.display = ""
       }
     
-      const uploadButton = document.getElementById('uploadButton');
-      const photoInput = document.getElementById('photo');
-    
-      // Open file browser when clicking the button
-      uploadButton.addEventListener('click', () => {
-        photoInput.click();
-      });
-    
 
+
+    const uploadButton = document.getElementById('uploadButton');
+    const photoInput = document.getElementById('photo');
     const label = document.querySelector(".uploadArea");
 
+    // Add event listener to upload button that clicks the photo input
+    uploadButton.addEventListener('click', () => {
+        photoInput.click();
+      });
+
+    // On change of the photo element, get files, if file is true then execute code inside
     document.getElementById('photo').addEventListener('change', function(event) {
 
         const file = event.target.files[0];
         const title = document.getElementById("title");
         const uploadCriteria = document.querySelector('.uploadCriteria');
 
+        // Preview image and set title from filename
         if (file) {
             const imageURL = URL.createObjectURL(file);
             title.value = file.name;
@@ -82,11 +84,12 @@ if (isLoggedIn()) {
     });
     
     document.querySelector('#uploadButton').addEventListener('click', function (event) {
-        // Prevent the default click behavior
         event.preventDefault();
         document.getElementById('photo').click();
     });
     
+
+    // On submit execute code
     document.querySelector('.submitImage').addEventListener('submit', function (event) {
         event.preventDefault();
     
@@ -96,12 +99,16 @@ if (isLoggedIn()) {
             this.reset();
             dialog.close();
     
+            // Reset selected image
             const selectedImageContainer = document.querySelector("#selectedImage");
             if (selectedImageContainer) {
                 selectedImageContainer.remove();
             }
 
+            // Reset selected image class
             label.classList.remove("has-image")
+
+            // Create toast
             createToast("Image ajoutée avec succès", "Succès", "green");
             closeToastDuration();
    
@@ -111,7 +118,7 @@ if (isLoggedIn()) {
         }
     });
     
-    
+    // Use IDs for the select input
     getWorks()
     .then((allWorks) => {
         const uniqueCategoryIds = [...new Set(allWorks.map((item) => item.categoryId))];
