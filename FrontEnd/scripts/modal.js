@@ -49,8 +49,32 @@ if (isLoggedIn()) {
         document.querySelector('.back').style.visibility = "hidden";
         document.querySelector('.dialog__bottom').style.display = ""
       }
-    
 
+      function isValidFile(input) {
+        const allowedTypes = ['image/png', 'image/jpeg'];
+        const maxSize = 4 * 1024 * 1024; // 4MB in bytes
+    
+        const file = input.files[0];
+    
+        if (!file) {
+            alert("No file selected.");
+            return false;
+        }
+    
+        if (!allowedTypes.includes(file.type)) {
+            alert("Only PNG and JPEG files are allowed.");
+            input.value = ''; // Clear the input
+            return false;
+        }
+    
+        if (file.size > maxSize) {
+            alert("File size exceeds the limit of 4MB.");
+            input.value = ''; // Clear the input
+            return false;
+        }
+    
+        return true;
+    }
 
     const uploadButton = document.getElementById('uploadButton');
     const photoInput = document.getElementById('photo');
@@ -61,6 +85,31 @@ if (isLoggedIn()) {
         photoInput.click();
       });
 
+
+
+      document.getElementById('image-form').addEventListener("input", () => {
+        const title = document.getElementById("title");
+        const image = document.getElementById("photo");
+        const uploadButton = document.querySelector(".modal__submitbutton");
+    
+        // Automatically fill in the title when an image is selected
+        image.addEventListener("change", () => {
+            if (image.files[0]) {
+                // Use the file name as the title (you can modify this logic as needed)
+                title.value = image.files[0].name;
+            }
+        });
+    
+        // Check both conditions to determine if the form is validated
+        if (title.value !== "" && image.files[0] !== null) {
+            // Add the id attribute if both conditions are met
+            uploadButton.id = "validatedForm";
+        } else {
+            // Remove the id attribute if any condition is not met
+            uploadButton.removeAttribute("id");
+        }
+    });
+    
     // On change of the photo element, get files, if file is true then execute code inside
     document.getElementById('photo').addEventListener('change', function(event) {
 
@@ -68,18 +117,21 @@ if (isLoggedIn()) {
         const title = document.getElementById("title");
         const uploadCriteria = document.querySelector('.uploadCriteria');
 
-        // Preview image and set title from filename
-        if (file) {
-            const imageURL = URL.createObjectURL(file);
-            title.value = file.name;
-            label.classList.add("has-image");
-
-            const previewImage = document.createElement("img");
-            previewImage.src = imageURL;
-            previewImage.id = "selectedImage";
-            previewImage.alt = "Selected Image";
-
-            uploadCriteria.parentNode.insertBefore(previewImage, uploadCriteria.nextSibling);
+        if(!isValidFile(event.target)) {
+            return
+        } else {
+            // Preview image and set title from filename
+            if (file) {
+                const imageURL = URL.createObjectURL(file);
+                label.classList.add("has-image");
+    
+                const previewImage = document.createElement("img");
+                previewImage.src = imageURL;
+                previewImage.id = "selectedImage";
+                previewImage.alt = "Selected Image";
+    
+                uploadCriteria.parentNode.insertBefore(previewImage, uploadCriteria.nextSibling);
+            }
         }
     });
     
@@ -92,12 +144,32 @@ if (isLoggedIn()) {
     // On submit execute code
     document.querySelector('.submitImage').addEventListener('submit', function (event) {
         event.preventDefault();
+
     
         try {
+
+            const title = document.getElementById('title')
+            const image = document.getElementById('photo')
+
+
+
+            if (title.value === "" || title.value === null) {
+                alert("Un titre doit etre present.")
+                event.preventDefault();
+                return;
+            }
+
+            if (!image.files || !image.files[0]) {
+                alert("Une image doit etre present.")
+                event.preventDefault();
+                return;
+            }
+
             const formData = new FormData(this);
             uploadPhoto(formData);
             this.reset();
             dialog.close();
+
     
             // Reset selected image
             const selectedImageContainer = document.querySelector("#selectedImage");
@@ -131,9 +203,14 @@ if (isLoggedIn()) {
       
         // Create and append options to the select element
         uniqueCategoryIds.forEach((categoryId) => {
+
+            const category = allWorks.find(
+                (item) => item.categoryId === categoryId
+              ).category;
+
           const optionElement = document.createElement('option');
           optionElement.value = categoryId;
-          optionElement.textContent = categoryId; // You can replace this with actual category names if available
+          optionElement.textContent = category.name; // You can replace this with actual category names if available
           selectElement.appendChild(optionElement);
         });
       })
@@ -143,8 +220,11 @@ if (isLoggedIn()) {
       
 }
 
-dialog.addEventListener('click', (event) => {
-    if (event.target.id === 'dialog') {
-        dialog.close();
-    }
-});
+if (window.location.pathname.endsWith("/index.html")) { 
+    dialog.addEventListener('click', (event) => {
+        if (event.target.id === 'dialog') {
+            dialog.close();
+        }
+    });
+}
+

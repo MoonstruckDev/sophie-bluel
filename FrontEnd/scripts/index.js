@@ -3,6 +3,5 @@
   import "./works.js"
   import "./works-filters.js"
   import "./login-flow.js"
-  import "./admin.js"
   import "./modal.js"
   import "./toasts.js"

@@ -573,7 +573,7 @@ dialog {
     background-color: grey;
 }
 
-.submitImage > input[type="submit"]:hover {
+#validatedForm {
     background-color: #1D6154;
     transition: background-color 0.3s ease;
 }

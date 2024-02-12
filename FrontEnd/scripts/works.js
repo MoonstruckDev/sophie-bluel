@@ -71,14 +71,21 @@ export async function updateGallery(workId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const works = await getWorks();
-        displayWorks(works, gallery);
-    } catch (error) {
-        console.error('Error getting works:', error.message);
-    }
-});
+
+if (window.location.pathname.endsWith("/index.html")) { 
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const works = await getWorks();
+            displayWorks(works, gallery);
+        } catch (error) {
+            console.error('Error getting works:', error.message);
+        }
+    });
+}
+
+
+
+
 
 
 

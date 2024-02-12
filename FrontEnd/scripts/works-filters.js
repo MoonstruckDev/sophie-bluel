@@ -46,10 +46,10 @@ getWorks()
       ulElement.appendChild(liElement);
     });
 
-    // // Apply hidden style if logged in
-    // if (isLoggedIn()) {
-    //   ulElement.style.display = "none";
-    // }
+    // Apply hidden style if logged in
+    if (isLoggedIn()) {
+      ulElement.style.display = "none";
+    }
 
     // Move the event listeners inside the .then() block
 

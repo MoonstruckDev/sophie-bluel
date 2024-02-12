@@ -1,4 +1,3 @@
-import { logout } from './admin.js'; 
 import { closeToastDuration, createToast } from './toasts.js';
 
 
@@ -30,7 +29,7 @@ export function isLoggedIn() {
         console.log("User is logged in");
         loginButton.textContent = 'logout';
         return true;
-        
+
     } else {
         // User is not logged in
         console.log("User is not logged in");
@@ -49,6 +48,13 @@ export function loginUser(loginDetails) {
     })
     .then(response => {
         if (!response.ok) {
+
+            console.log(response.statusText.toLowerCase())
+            if (response.statusText.toLowerCase() === "not found") {
+                createToast("Erreure", "Utilisateur ou mot de passe incorrect", "red");
+                closeToastDuration();    
+            }
+       
             createToast("Error", response.statusText, "red");
             closeToastDuration();
             
@@ -86,6 +92,14 @@ export function loginUser(loginDetails) {
     });
 }
 
+export function logout() {
+    sessionStorage.removeItem('token')
+    // Make filters show in flex when logging out
+    const filter__list = document.querySelector('.filter__list');
+    filter__list.style.display = "flex";
+}
+
+
 const loginButton = document.querySelector('.login__button');
 loginButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -101,6 +115,7 @@ loginButton.addEventListener('click', (e) => {
     }
     else window.location.href = "login.html";
 } )
+
 
 
 

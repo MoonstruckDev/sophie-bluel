@@ -29,8 +29,8 @@
 				<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 				<nav>
 					<ul>
-						<li>projets</li>
-						<li>contact</li>
+						<li><a href="/index.html">projets</a></li>
+						<li><a href="#">contact</a></li>
 						<li><a class="login__button" href="login.html">login</a></li>
 						<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 					</ul>
@@ -82,20 +82,20 @@
 										  <span class="uploadCriteria">jpg, png : 4mo max</span>
 									  </label>									  
 									<input type="file" id="photo" name="image"
-										accept="image/jpeg, image/png" required>
+										accept="image/jpeg, image/png">
 								</div>
 
 								<div class="attributeArea">
 									<label for="title">Titre</label>
-									<input id="title" type="text" name="title" required>
+									<input id="title" type="text" name="title">
 
 									<label for="categorySelect">Catégorie</label>
-									<select id="categorySelect" name="category" required>
+									<select id="categorySelect" name="category">
 										<option value="" disabled selected>Select a category</option>
 									</select>
 								</div>
 								<div class="spacer"></div>
-								<input type="submit" value="Valider">
+								<input type="submit" class="modal__submitbutton" value="Valider">
 							</form>
 
 						</section>
