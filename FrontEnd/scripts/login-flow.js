@@ -30,13 +30,12 @@ export function isLoggedIn() {
         console.log("User is logged in");
         loginButton.textContent = 'logout';
         return true;
-        // Add additional logic for logged-in state if needed
+        
     } else {
         // User is not logged in
         console.log("User is not logged in");
         loginButton.textContent = 'login';
         return false;
-        // Add additional logic for not logged-in state if needed
     }
 }
 
@@ -75,9 +74,6 @@ export function loginUser(loginDetails) {
         setTimeout(() => {
             goHome();
         }, 2000);
-
-
-
     })
     .catch(error => {
         // Handle errors here
