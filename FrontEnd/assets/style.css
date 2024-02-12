@@ -533,13 +533,13 @@ dialog {
 .upload__container {
     width: 100%;
     background-color: #E8F1F6;
+    border-radius: .2rem;
 }
 
 .upload__container > .uploadArea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0;
 }
 
 .uploadArea {
@@ -627,7 +627,7 @@ dialog > section {
 }
 
 #selectedImage {
-    max-width: 100%;
+    max-width: 50%;
     max-height: 200px;
 }
 
