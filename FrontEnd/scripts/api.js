@@ -5,9 +5,13 @@ export async function getWorks() {
     try {
         const cachedItems = sessionStorage.getItem('allWorks');
         
+
+        // If there are cached items then return cached items
         if (cachedItems) {
             return JSON.parse(cachedItems);
-        } else {
+        }
+        // Else set the cache by pulling data from the API
+        else {
             const response = await fetch('http://localhost:5678/api/works');
             const works = await response.json();
     
@@ -65,6 +69,8 @@ export async function uploadPhoto(formData) {
         sessionStorage.removeItem("allWorks")
 
         const works = await getWorks();
+        
+        // Make sure this gets treated as an array
         const worksArray = Array.isArray(works) ? works : [works];
 
 

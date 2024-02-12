@@ -14,7 +14,7 @@ if (window.location.pathname.endsWith("/login.html")) {
           password: formData.get('password'),
         };
     
-        postLogin(userData);
+        loginUser(userData);
     });
 }
 
@@ -40,7 +40,7 @@ export function isLoggedIn() {
     }
 }
 
-export function postLogin(loginDetails) {
+export function loginUser(loginDetails) {
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         body: JSON.stringify(loginDetails),

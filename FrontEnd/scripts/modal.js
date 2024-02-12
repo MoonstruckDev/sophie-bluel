@@ -137,7 +137,6 @@ if (isLoggedIn()) {
 }
 
 dialog.addEventListener('click', (event) => {
-    console.log(event.target.id)
     if (event.target.id === 'dialog') {
         dialog.close();
     }
