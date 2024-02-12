@@ -114,7 +114,7 @@ if (isLoggedIn()) {
     document.getElementById('photo').addEventListener('change', function(event) {
 
         const file = event.target.files[0];
-        const title = document.getElementById("title");
+        const uploadBox = document.querySelector(".uploadArea")
         const uploadCriteria = document.querySelector('.uploadCriteria');
 
         if(!isValidFile(event.target)) {
@@ -129,6 +129,7 @@ if (isLoggedIn()) {
                 previewImage.src = imageURL;
                 previewImage.id = "selectedImage";
                 previewImage.alt = "Selected Image";
+                uploadBox.style.padding = "0";
     
                 uploadCriteria.parentNode.insertBefore(previewImage, uploadCriteria.nextSibling);
             }
