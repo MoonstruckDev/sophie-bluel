@@ -73,7 +73,7 @@ export function loginUser(loginDetails) {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('userId', userId);
         
-        createToast("Success", "Login successful!", "green");
+        createToast("Connecté avec succès.", "Connection accepté!", "green");
         
         
         // Add a delay of 2 seconds before calling goHome()
