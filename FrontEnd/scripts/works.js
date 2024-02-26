@@ -71,17 +71,17 @@ export async function updateGallery(workId) {
     }
 }
 
-
-if (window.location.pathname.endsWith("/index.html")) { 
-    document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Check if the current page is the login page
+    if (window.location.pathname !== '/login.html') {
         try {
             const works = await getWorks();
             displayWorks(works, gallery);
         } catch (error) {
             console.error('Error getting works:', error.message);
         }
-    });
-}
+    }
+});
 
 
 
