@@ -48,17 +48,14 @@ export function loginUser(loginDetails) {
     })
     .then(response => {
         if (!response.ok) {
-
-            console.log(response.statusText.toLowerCase())
             if (response.statusText.toLowerCase() === "not found") {
-                createToast("Erreure", "Utilisateur ou mot de passe incorrect", "red");
+                createToast("Erreure", "Utilisateur non trouvé", "red");
                 closeToastDuration();    
             }
-       
-            createToast("Error", response.statusText, "red");
-            closeToastDuration();
-            
-            console.log(response.statusText);
+            if (response.statusText.toLowerCase() === "unauthorized") {
+                createToast("Erreure", "Mot de passe incorrect", "red");
+                closeToastDuration();
+            }
             throw new Error(`Error: ${response.statusText}`);
         }
         return response.json();

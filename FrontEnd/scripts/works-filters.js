@@ -32,6 +32,8 @@ getWorks()
     // foreach category ID within the set make a button
     uniqueCategoryIds.forEach((categoryId) => {
       const button = document.createElement("button");
+
+      // find item in allWorks where item category = categoryId then get it's category
       const category = allWorks.find(
         (item) => item.categoryId === categoryId
       ).category;
